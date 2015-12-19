@@ -42,16 +42,16 @@ def capture():
 
                 if blue==0 and red==0 and green==0:
                     continue
-                
+
                 if red < minRed:
                     minRed = red
-                    
+
                 if red > maxRed:
                     maxRed = red
-                    
+
                 redGreenRange = int(red)-int(green)
                 redBlueRange = int(red)-int(blue)
-                
+
                 if redGreenRange < minRedGreenRange:
                     minRedGreenRange = redGreenRange
 
@@ -70,7 +70,7 @@ def capture():
                 blue = frame[i,j,0]
                 green = frame[i,j,1]
                 red = frame[i,j,2]
-                
+
                 redGreen = int(red)-int(green)
                 redBlue = int(red)-int(blue)
 
@@ -78,12 +78,12 @@ def capture():
                     opImage[i,j] = 255
                 else:
                     opImage[i,j] = 0
-                    
-        #line segmentation
+
+        #edge detection
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         edges = cv2.Canny(gray, 50, 150, apertureSize=3)
         lines = cv2.HoughLinesP(edges, 1, np.pi/180, minLineLength, maxLineGap)
-        
+
         if lines != None:
             for i in range(len(lines[0])):
                 points=[0 for j in range(4)]
@@ -121,7 +121,7 @@ def capture():
             ser.write("\x32")
         print tx
 
-        
+
         k=cv2.waitKey(1)
         if k == 27: ## 27 - ASCII for escape key
             break
@@ -139,13 +139,13 @@ def predict(X,theta1,theta2):
     a3 = sigmoid(z3)
     #the indice corresponding to maximum argument will be the prediction
     return np.argmax(z3) + 1
-       
+
 def main():
     output = capture()
-    
+
 if __name__=="__main__":
     main()
 
 cam.release()
 cv2.destroyAllWindows()
-    
+

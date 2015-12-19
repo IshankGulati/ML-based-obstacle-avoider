@@ -1,0 +1,1 @@
+This project aimed at developing an Artificial Neural Network controlled autonomous robot which can avoid any kind of obstacles in its path. You can find more details about it on my [website](http://ishankgulati.github.io/posts/Machine%20Learning%20based%20Obstacle%20Avoider/).
